@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meniu - Butoiul cu Jar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(139, 69, 19, 0.95);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #daa520;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #daa520;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Menu Container */
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Menu Categories */
+        .menu-category {
+            background: white;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .category-header {
+            background: #8b4513;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .category-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #daa520;
+        }
+
+        .category-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Menu Items */
+        .menu-items {
+            padding: 2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+
+        .item-info {
+            flex: 1;
+            margin-right: 1rem;
+        }
+
+        .item-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-ingredients {
+            color: #888;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .item-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #8b4513;
+            white-space: nowrap;
+        }
+
+        /* Special Items */
+        .special-item {
+            position: relative;
+        }
+
+        .special-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #e74c3c;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Beer Grid */
+        .beer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .beer-item {
+            text-align: center;
+            padding: 1.5rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .beer-item:hover {
+            border-color: #8b4513;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .beer-type {
+            font-size: 1.1rem;
+            color: #8b4513;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #8b4513;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #daa520;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #a0522d;
+            padding-top: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .item-price {
+                margin-top: 1rem;
+                font-size: 1.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .category-header h2 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🍺 Butoiul cu Jar</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Acasă</a></li>
+                <li><a href="menu.html" class="active">Meniu</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>Meniul Nostru</h1>
+        <p>Bere proaspătă și mâncare tradițională românească</p>
+    </div>
+
+    <div class="menu-container">
+        <!-- Aperitive -->
+        <div class="menu-category">
+            <div class="category-header">
+                <h2>Aperitive</h2>
+                <p>Pentru a începe masa în stil românesc</p>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item special-item">
+                    <div class="special-badge">★</div>
+                    <div class="item-info">
+                        <div class="item-name">Platou Mixt Românesc</div>
+                        <div class="item-description">Selecție de mezeluri românești, brânzeturi și murături</div>
+                        <div class="item-ingredients">Cârnați de Pleșcoi, telemea, caș, murături asortate</div>
+                    </div>
+                    <div class="item-price">45 lei</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Salată de Icre</div>
+                        <div class="item-description">Icre de crap cu ceapă și pâine prăjită</div>
+                        <div class="item-ingredients">Icre de crap, ceapă roșie, pâine de casă</div>
+                    </div>
+                    <div class="item-price">25 lei</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Slănină cu Ceapă</div>
+                        <div class="item-description">Slănină afumată cu ceapă și mujdei</div>
+                        <div class="item-ingredients">Slănină de porc, ceapă verde, mujdei</div>
+                    </div>
+                    <div class="item-price">20 lei</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supe si Ciorbe -->
+        <div class="menu-category">
+            <div class="category-header">
+                <h2>Supe și Ciorbe</h2>
+                <p>Preparate tradiționale de casă</p>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item special-item">
+                    <div class="special-badge">★</div>
+                    <div class="item-info">
+                        <div class="item-name">Ciorbă de Burtă</div>
+                        <div class="item-description">Ciorbă tradițională cu burtă de vițel și smântână</div>
+                        <div class="item-ingredients">Burtă de vițel, legume, smântână, mujdei</div>
+                    </div>
+                    <div class="item-price">22 lei</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Ciorbă de Fasole cu Ciolan</div>
+                        <div class="item-description">Fasole albă cu ciolan afumat și ardei iute</div>
+                        <div class="item-ingredients">Fasole albă, ciolan afumat, ceapă, ardei</div>
+                    </div>
+                    <div class="item-price">20 lei</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Supă de Găină cu Tăiței</div>
+                        <div class="item-description">Supă de găină de țară cu tăiței de casă</div>
+                        <div class="item-ingredients">Găină de țară, tăiței de casă, legume</div>
+                    </div>
+                    <div class="item-price">18 lei</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feluri Principale -->
+        <div class="menu-category">
+            <div class="category-header">
+                <h2>Feluri Principale</h2>
+                <p>Specialități românești la grătar și la tigaie</p>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item special-item">
+                    <div class="special-badge">★</div>
+                    <div class="item-info">
+                        <div class="item-name">Mici cu Muștar și Bere</div>
+                        <div class="item-description">Mici tradiționali cu muștar de Tecuci și bere la draft</div>
+                        <div class="item-ingredients">Mici de casă, muștar, pâine, bere 0.5L</div>
+                    </div>
+                    <div class="item-price">35 lei</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Costițe de Porc la Bere</div>
+                        <div class="item-description">Costițe marinate în bere și coapte la cuptor</div>
+                        <div class="item-ingredients">Costițe de porc, cartofi noi, salată coleslaw</div>
+                    </div>
+                    <div class="item-price">42 lei</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Papanași cu Smântână</div>
+                        <div class="item-description">Papanași prăjiți cu brânză dulce și smântână</div>
+                        <div class="item-ingredients">Brânză dulce, smântână, gem de vișine</div>
+                    </div>
+                    <div class="item-price">28 lei</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Ciulama de Pui</div>
+                        <div class="item-description">Ciulama de pui cu ciuperci și mămăligă</div>
+                        <div class="item-ingredients">Piept de pui, ciuperci, smântână, mămăligă</div>
+                    </div>
+                    <div class="item-price">32 lei</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Șnițel Vienez</div>
+                        <div class="item-description">Șnițel de porc pane cu cartofi prăjiți</div>
+                        <div class="item-ingredients">Cotlet de porc, cartofi, salată de varză</div>
+                    </div>
+                    <div class="item-price">38 lei</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deserturi -->
+        <div class="menu-category">
+            <div class="category-header">
+                <h2>Deserturi</h2>
+                <p>Dulciuri tradiționale românești</p>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Papanași cu Smântână și Gem</div>
+                        <div class="item-description">Papanași de casă cu smântână și gem de fructe</div>
+                        <div class="item-ingredients">Brânză dulce, smântână, gem de caise</div>
+                    </div>
+                    <div class="item-price">18 lei</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Clătite cu Brânză Dulce</div>
+                        <div class="item-description">Clătite cu umplutura de brânză dulce</div>
+                        <div class="item-ingredients">Brânză dulce, stafide, zahăr pudră</div>
+                    </div>
+                    <div class="item-price">15 lei</div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <div class="item-name">Cozonac cu Nucă</div>
+                        <div class="item-description">Felie de cozonac de casă cu nucă și stafide</div>
+                        <div class="item-ingredients">Nucă, stafide, zahăr vanilat</div>
+                    </div>
+                    <div class="item-price">12 lei</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Beri -->
+        <div class="menu-category">
+            <div class="category-header">
+                <h2>Beri</h2>
+                <p>Selecția noastră de beri românești și internaționale</p>
+            </div>
+            <div class="beer-grid">
+                <div class="beer-item">
+                    <div class="beer-type">🍺 Ursus Premium</div>
+                    <div class="item-name">La Draft - 0.5L</div>
+                    <div class="item-description">Bere blondă românească</div>
+                    <div class="item-price">12 lei</div>
+                </div>
+                <div class="beer-item">
+                    <div class="beer-type">🍺 Ciuc Premium</div>
+                    <div class="item-name">La Draft - 0.5L</div>
+                    <div class="item-description">Bere premium românească</div>
+                    <div class="item-price">13 lei</div>
+                </div>
+                <div class="beer-item">
+                    <div class="beer-type">🍺 Timișoreana</div>
+                    <div class="item-name">Sticlă - 0.5L</div>
+                    <div class="item-description">Bere tradițională din Timișoara</div>
+                    <div class="item-price">11 lei</div>
+                </div>
+                <div class="beer-item">
+                    <div class="beer-type">🍺 Stella Artois</div>
+                    <div class="item-name">Sticlă - 0.33L</div>
+                    <div class="item-description">Bere belgiană premium</div>
+                    <div class="item-price">15 lei</div>
+                </div>
+                <div class="beer-item">
+                    <div class="beer-type">🍺 Heineken</div>
+                    <div class="item-name">Sticlă - 0.33L</div>
+                    <div class="item-description">Bere olandeză</div>
+                    <div class="item-price">14 lei</div>
+                </div>
+                <div class="beer-item">
+                    <div class="beer-type">🍺 Bere Neagră</div>
+                    <div class="item-name">Ursus Black - 0.5L</div>
+                    <div class="item-description">Bere neagră românească</div>
+                    <div class="item-price">13 lei</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Bulevardul Independenței 127<br>
+                Brăila, România<br>
+                Telefon: 0239 123 456</p>
+            </div>
+            <div class="footer-section">
+                <h3>Program</h3>
+                <p>Luni - Joi: 11:00 - 24:00<br>
+                Vineri - Sâmbătă: 11:00 - 02:00<br>
+                Duminică: 12:00 - 24:00</p>
+            </div>
+            <div class="footer-section">
+                <h3>Rezervări</h3>
+                <p>Sunați-ne pentru rezervări<br>
+                sau veniți direct la local</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Butoiul cu Jar. Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+</body>
+</html>

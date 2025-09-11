@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Butoiul cu Jar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(139, 69, 19, 0.95);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #daa520;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #daa520;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Container */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .contact-info h2 {
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .info-item {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #8b4513;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-content {
+            display: inline-block;
+            vertical-align: top;
+            max-width: calc(100% - 60px);
+        }
+
+        .info-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-details {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Hours Table */
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .hours-table th,
+        .hours-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hours-table th {
+            background: #f8f8f8;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .hours-table td {
+            color: #666;
+        }
+
+        /* Map Section */
+        .map-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .map-container h2 {
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.2rem;
+            border: 2px dashed #ccc;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: #8b4513;
+            color: white;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .features-section h2 {
+            color: #daa520;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .feature h3 {
+            color: #daa520;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature p {
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #8b4513;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #daa520;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #a0522d;
+            padding-top: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 2rem 1rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                padding: 2rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .info-content {
+                display: block;
+                margin-top: 1rem;
+                max-width: 100%;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🍺 Butoiul cu Jar</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Acasă</a></li>
+                <li><a href="menu.html">Meniu</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>Contactează-ne</h1>
+        <p>Vino să ne cunoști și să savurezi o bere proaspătă!</p>
+    </div>
+
+    <div class="contact-container">
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h2>Informații de Contact</h2>
+            
+            <div class="info-item">
+                <span class="info-icon">📍</span>
+                <div class="info-content">
+                    <div class="info-title">Adresa</div>
+                    <div class="info-details">
+                        Bulevardul Independenței 127<br>
+                        Brăila 810019, România<br>
+                        Județul Brăila
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <span class="info-icon">📞</span>
+                <div class="info-content">
+                    <div class="info-title">Telefon</div>
+                    <div class="info-details">
+                        Restaurant: 0727 729 830
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <span class="info-icon">✉️</span>
+                <div class="info-content">
+                    <div class="info-title">Email</div>
+                    <div class="info-details">
+                        contact@butoiulcujar.ro<br>
+                        comenzi@butoiulcujar.ro
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <span class="info-icon">🕒</span>
+                <div class="info-content">
+                    <div class="info-title">Program de Lucru</div>
+                    <table class="hours-table">
+                        <tr>
+                            <th>Ziua</th>
+                            <th>Program</th>
+                        </tr>
+                        <tr>
+                            <td>Marti - Duminica</td>
+                            <td>14:00 - 22:00</td>
+                        </tr>
+                        <tr>
+                            <td>Luni</td>
+                            <td>Inchis</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+
+            
+
+            <div class="info-item">
+                <span class="info-icon">🚌</span>
+                <div class="info-content">
+                    <div class="info-title">Transport Public</div>
+                    <div class="info-details">
+                        Autobuzele 1, 7 și 12 opresc în apropierea restaurantului.<br>
+                        Stația "Independenței" se află la 2 minute de mers pe jos.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-container">
+            <h2>Unde ne găsiți</h2>
+            <div class="map-placeholder">
+                📍 Bulevardul Independenței 127, Brăila
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d701.9054332577277!2d27.96639496966472!3d45.27565674192298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b72900444ee5df%3A0x5ab9a88220d0dd87!2zQXJ0IENhZsOp!5e0!3m2!1sro!2sro!4v1757628508817!5m2!1sro!2sro"" 
+                        width="100%" height="350" style="border:0; border-radius: 5px;" 
+                        allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+            <p style="margin-top: 1rem; color: #666;">
+                Situat în centrul orașului Brăila, pe una dintre cele mai importante artere ale orașului.
+            </p>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-section">
+            <h2>De ce să ne alegi?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <h3>🍺 Bere Proaspătă</h3>
+                    <p>Servim bere proaspătă la draft și o selecție largă de beri românești și internaționale.</p>
+                </div>
+                <div class="feature">
+                    <h3>🍖 Mâncare Tradițională</h3>
+                    <p>Preparate românești autentice, făcute după rețete tradiționale, cu ingrediente proaspete.</p>
+                </div>
+                <div class="feature">
+                    <h3>🎵 Atmosferă Plăcută</h3>
+                    <p>Ambient prietenos și relaxat, perfect pentru o ieșire cu prietenii sau familia.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Bulevardul Independenței 127<br>
+                Brăila, România<br>
+                Telefon: 0239 123 456</p>
+            </div>
+            <div class="footer-section">
+                <h3>Program</h3>
+                <p>Marti - Duminica: 14:00 - 22:00<br>
+                Luni: Inchis
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Urmărește-ne</h3>
+                <p>Rămâi la curent cu ofertele speciale<br>
+                și evenimentele noastre.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Butoiul cu Jar. Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+</body>
+</html>
